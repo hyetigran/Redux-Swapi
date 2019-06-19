@@ -10,3 +10,23 @@
 export const FETCH_CHAR_START = 'FETCH_CHAR_START';
 export const FETCH_CHAR_SUCCESS = 'FETCH_CHAR_SUCCESS';
 export const FETCH_CHAR_FAIL = 'FETCH_CHAR_FAIL';
+
+export const fetchCharSuccess = characters => {
+	return {
+		type: FETCH_CHAR_SUCESS,
+		characters: characters
+	};
+};
+
+export const fetchCharFail = error => {
+	return {
+		type: FETCH_CHAR_FAIL,
+		error: error
+	};
+};
+
+export const fetchCharStart = error => {
+	return {
+		type: FETCH_CHAR_START
+	};
+};
