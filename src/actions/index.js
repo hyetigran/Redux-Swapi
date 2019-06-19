@@ -30,3 +30,24 @@ export const fetchCharStart = error => {
 		type: FETCH_CHAR_START
 	};
 };
+
+export const fetchCharacters = () => {
+	return dispatch => {
+		dispatch(fetchCharStart());
+		axios
+			.get(`https://swapi.co/api/people/`)
+			.then(res => {
+				const fetchedChar = [];
+				for (let key in res.data) {
+					fetchedChar.push({
+						...res.data[key],
+						id: key
+					});
+				}
+				dispatch(fetchCharSuccess(fetchedChar));
+			})
+			.catch(err => {
+				dispatch(fetchCharFail(err));
+			});
+	};
+};
