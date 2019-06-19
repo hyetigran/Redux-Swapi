@@ -1,3 +1,4 @@
+import axios from 'axios';
 // we'll need axios
 
 // we'll need to create 3 different action types here.
@@ -13,7 +14,7 @@ export const FETCH_CHAR_FAIL = 'FETCH_CHAR_FAIL';
 
 export const fetchCharSuccess = characters => {
 	return {
-		type: FETCH_CHAR_SUCESS,
+		type: FETCH_CHAR_SUCCESS,
 		characters: characters
 	};
 };
