@@ -1,35 +1,41 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { CharacterList } from "../components";
+import { CharacterList } from '../components';
+import * as actions from '../actions/index';
 // import actions
 
 class CharacterListView extends React.Component {
-  constructor() {
-    super();
-  }
+	componentDidMount() {
+		// call our action
+		this.props.onFetchChar();
+	}
 
-  componentDidMount() {
-    // call our action
-  }
-
-  render() {
-    if (this.props.fetching) {
-      // return something here to indicate that you are fetching data
-    }
-    return (
-      <div className="CharactersList_wrapper">
-        <CharacterList characters={this.props.characters} />
-      </div>
-    );
-  }
+	render() {
+		if (this.props.fetching) {
+			// return something here to indicate that you are fetching data
+		}
+		return (
+			<div className="CharactersList_wrapper">
+				<CharacterList characters={this.props.characters} />
+			</div>
+		);
+	}
 }
 
 // our mapStateToProps needs to have two properties inherited from state
 // the characters and the fetching boolean
-export default connect(
-  null /* mapStateToProps replaces null here */,
-  {
-    /* action creators go here */
-  }
-)(CharacterListView);
+const mapStateToProps = state => {
+	return {
+		characters: state.charsReducer.characters,
+		fetching: state.charsReducer.loading
+	};
+};
+const mapDispatchToProps = dispatch => {
+	return {
+		onFetchChar: () => {
+			dispatch(actions.fetchCharacters());
+		}
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterListView);
